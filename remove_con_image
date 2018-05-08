@@ -1,0 +1,9 @@
+#!/bin/bash
+CONTAINER_ID=`docker ps -a | grep "Exited" | awk '{print $1}'`
+if [ ! -z $CONTAINER_ID ]; then
+	docker rm ${CONTAINER_ID}
+fi
+IMAGE_ID=`docker images | head -2 | tail -1 | awk '{print $3}'`
+if [ ! -z $IMAGE_ID ]; then
+	docker rmi ${IMAGE_ID}
+fi
